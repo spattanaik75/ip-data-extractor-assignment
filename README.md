@@ -47,7 +47,7 @@ Please provide the source code, automated tests, any additional data (e.g. build
 >  node .\node_modules\ip-data-extractor-cli\dist\commands\merge.js {$path_to_file1} {$path_to_file2}  
 
 `use existing testfiles`
-> node .\node_modules\ip-data-extractor-cli\dist\commands\merge.js ..\ip-data-extractor-assignment\__tests__\t1_f1.txt ..\ip-data-extractor-assignment\__tests__\t1_f2.txt
+> node .\node_modules\ip-data-extractor-cli\dist\commands\merge.js .\node_modules\ip-data-extractor-cli\test\resources\t1_f1.txt .\node_modules\ip-data-extractor-cli\test\resources\t1_f2.txt
 
 
 **TODO**
