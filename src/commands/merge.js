@@ -1,44 +1,62 @@
+/* eslint-disable no-undef */
 const fs = require('fs');
 const lineByLine = require('n-readlines');
 
-// could also use the library 
-// let isValidIp = require('is-ip');
-// isValidIp('192.168.0.1');
-const isValidIP = (str) => {
+/**
+ * Validates ip addresses
+ * quick sort is chosen here for better average time complexity O(nlogn)
+ * alternative is 'is-ip' library
+ * @param {Array} inputArray Arguments to the command
+ */
+// eslint-disable-next-line no-unused-vars
+const isValidIP = str => {
     const octet = '(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]?|0)';
     const regex = new RegExp(`^${octet}\\.${octet}\\.${octet}\\.${octet}$`);
     return regex.test(str);
 };
 
+/**
+ * Sorts an array of integers using quick sort
+ * quick sort is chosen here for better average time complexity O(nlogn)
+ * alternative is array.sort()
+ * @param {Array} inputArray Arguments to the command
+ */
+const quickSort = inputArray => {
+    if (inputArray.length <= 1) {
+        return inputArray;
+    } else {
+        const left = [];
+        const right = [];
+        const newArray = [];
+        const pivot = inputArray.pop();
+        const length = inputArray.length;
 
-// alternatives are array.sort()
-// quick sort is chosen here for better average time complexity O(nlogn)
-const quickSort = (origArray)=>{
-	if (origArray.length <= 1) { 
-		return origArray;
-	} else {
-		const left = [];
-		const right = [];
-		const newArray = [];
-		const pivot = origArray.pop();
-		const length = origArray.length;
-
-		for (let i = 0; i < length; i++) {
-			if (origArray[i] <= pivot) {
-				left.push(origArray[i]);
-			} else {
-				right.push(origArray[i]);
-			}
-		}
-		return newArray.concat(quickSort(left), pivot, quickSort(right));
-	}
+        for (let i = 0; i < length; i++) {
+            if (inputArray[i] <= pivot) {
+                left.push(inputArray[i]);
+            } else {
+                right.push(inputArray[i]);
+            }
+        }
+        return newArray.concat(quickSort(left), pivot, quickSort(right));
+    }
 };
 
+// placeholder for final result
+// eslint-disable-next-line no-undef
 const result = new Map();
-const mergeAndSort= (file, inputMap) =>{
+
+/**
+ * Merges existing result map with new file input
+ * groups by ip addresses
+ * sorts the gathered integeters in ascending order
+ * @param {String} file Arguments to the command
+ */
+const mergeAndSort= (file) =>{
 	if(fs.existsSync(file)){
 		const liner = new lineByLine(file);
 		let line;
+		// eslint-disable-next-line no-cond-assign
 		while (line = liner.next()){
 			const line_arr = line.toString().split(":");
 			if (line_arr.length >0){
@@ -47,8 +65,10 @@ const mergeAndSort= (file, inputMap) =>{
 				const line_digits = line.toString().split(":")[1].trim().split(",");
 				// TODO: add digits validation logic here
 				if (result.get(line_ip) !== undefined){	 
+					// eslint-disable-next-line no-undef
 					result.set(line_ip , quickSort(Array.from(new Set(result.get(line_ip).concat(line_digits)))));
 				}else{
+					// eslint-disable-next-line no-undef
 					result.set(line_ip, quickSort(Array.from(new Set(line_digits))));
 				}
 			}
@@ -59,10 +79,8 @@ const mergeAndSort= (file, inputMap) =>{
 };
 
 const files = process.argv.slice(2);
-files.forEach(
-	mergeAndSort
-);
+files.forEach(mergeAndSort);
 
-result.forEach((value, key) =>{
-	console.log(`${key}: ${value}`);
+result.forEach((value, key) => {
+    console.log(`${key}: ${value}`);
 });
