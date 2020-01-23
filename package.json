@@ -5,12 +5,12 @@
   "main": "index.js",
   "repository": "git@github.com:spattanaik75/ip-data-extractor-assignment.git",
   "author": "soumya pattanaik",
-  "license": "Apache License 2.0",
+  "license": "MIT",
   "scripts": {
     "build": "babel src --out-dir dist",
     "prettier": "prettier --config ./.prettierrc --write \"**/*.js\"",
     "pretest": "eslint --ignore-path .gitignore .",
-    "postinstall": "rm -rf dist && yarn build",
+    "postinstall": "rm -rf dist && yarn run build",
     "lint": "yarn prettier --write --check --config ./.prettierrc \"**/*.js\" && eslint --fix ./src"
   },
   "bin": {
@@ -21,6 +21,7 @@
     "@babel/core": "^7.8.3",
     "@babel/node": "^7.8.3",
     "@babel/preset-env": "^7.8.3",
+    "n-readlines": "^1.0.0",
     "stdio": "^2.0.1"
   },
   "devDependencies": {
