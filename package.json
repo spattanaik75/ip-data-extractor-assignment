@@ -21,13 +21,13 @@
     "@babel/core": "^7.8.3",
     "@babel/node": "^7.8.3",
     "@babel/preset-env": "^7.8.3",
+    "babel-preset-env": "^1.7.0",
     "n-readlines": "^1.0.0",
     "stdio": "^2.0.1"
   },
   "devDependencies": {
     "babel-eslint": "^10.0.3",
     "babel-loader": "^8.0.6",
-    "babel-preset-env": "^1.7.0",
     "eslint": "^6.8.0",
     "eslint-plugin-babel": "^5.3.0",
     "eslint-plugin-import": "^2.20.0",

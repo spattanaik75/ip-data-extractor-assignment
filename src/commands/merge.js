@@ -34,7 +34,8 @@ const quickSort = (origArray)=>{
 	}
 };
 
-const mergeAndSort= (file) =>{
+const result = new Map();
+const mergeAndSort= (file, inputMap) =>{
 	if(fs.existsSync(file)){
 		const liner = new lineByLine(file);
 		let line;
@@ -56,8 +57,6 @@ const mergeAndSort= (file) =>{
 		console.log(`file ${file} does not exist`);
 	}
 };
-
-const result = new Map();
 
 const files = process.argv.slice(2);
 files.forEach(
