@@ -15,6 +15,7 @@ const isValidIP = str => {
     return regex.test(str);
 };
 
+
 /**
  * Sorts an array of integers using quick sort
  * quick sort is chosen here for better average time complexity O(nlogn)
@@ -63,18 +64,24 @@ const mergeAndSort= (file) =>{
 				const line_ip = line_arr[0].trim();
 				// TODO: add ip validation logic here
 				const line_digits = line.toString().split(":")[1].trim().split(",");
-				// TODO: add digits validation logic here
-				if (result.get(line_ip) !== undefined){	 
-					// eslint-disable-next-line no-undef
-					result.set(line_ip , quickSort(Array.from(new Set(result.get(line_ip).concat(line_digits)))));
+				if(!line_digits.some(isNaN)){
+					if (result.get(line_ip) !== undefined){	 
+						// eslint-disable-next-line no-undef
+						result.set(line_ip , quickSort(Array.from(new Set(result.get(line_ip).concat(line_digits)))));
+					}else{
+						// eslint-disable-next-line no-undef
+						result.set(line_ip, quickSort(Array.from(new Set(line_digits))));
+					}
 				}else{
-					// eslint-disable-next-line no-undef
-					result.set(line_ip, quickSort(Array.from(new Set(line_digits))));
+					console.log(`file ${file} have invalid data. Please provide an array of integers`);
+					process.exit();
 				}
+				
 			}
 		}
 	}else{
 		console.log(`file ${file} does not exist`);
+		process.exit();
 	}
 };
 
