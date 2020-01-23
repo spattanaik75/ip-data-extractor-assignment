@@ -7,17 +7,21 @@ Your program must accept two filenames as command-line parameters. These files w
 For example, file1:
 
 1.2.3.4: 1,3,4
+
 1.2.3.5: 9,8,7,6
 
 And file2:
 
 1.2.3.4: 4,5,6
+
 1.2.3.6: 1,1,1
 
 Your program should print:
 
 1.2.3.4: 1,3,4,5,6
+
 1.2.3.5: 6,7,8,9
+
 1.2.3.6: 1
 
 Your program should handle errors, including malformed input, appropriately and should be of a sufficient quality that it can run on a production Linux system.
